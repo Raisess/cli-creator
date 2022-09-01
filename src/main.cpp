@@ -4,7 +4,7 @@
 int main(int argc, char* argv[]) {
   CliCreator::Cli cli;
 
-  cli.commands["--hello"] = [](CliCreator::Arguments args) {
+  cli.commands["--hello"] = [](CliCreator::Arguments) {
     std::cout << "Hello!" << std::endl;
     return 0;
   };
