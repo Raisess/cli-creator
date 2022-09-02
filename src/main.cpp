@@ -1,26 +1,17 @@
 #include <iostream>
+#include <cstdlib>
 #include <cli-creator/Cli.h>
 
+using namespace CliCreator;
+
 int main(int argc, char* argv[]) {
-  CliCreator::Cli cli;
+  Cli cli;
 
-  cli.commands["--hello"] = [](CliCreator::Arguments) {
-    std::cout << "Hello!" << std::endl;
+  cli.commands["--init"] = [](Arguments args) {
+    auto project_name = args[0];
+    std::system(("git clone https://github.com/Raisess/cpp-cli-boilerplate " + project_name).c_str());
+    std::system(("cd " + project_name + " && bash setup.sh").c_str());
     return 0;
-  };
-
-  cli.commands["--sum"] = [](CliCreator::Arguments args) {
-    std::cout << std::stoi(args[0]) + std::stoi(args[1]) << std::endl;
-    return 0;
-  };
-
-  cli.commands["--sub"] = [](CliCreator::Arguments args) {
-    std::cout << std::stoi(args[0]) - std::stoi(args[1]) << std::endl;
-    return 0;
-  };
-
-  cli.commands["--fail"] = [](CliCreator::Arguments) {
-    return 1;
   };
 
   return cli.handle(argc, argv);
