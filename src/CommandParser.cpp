@@ -36,7 +36,7 @@ CliCreator::Arguments CliCreator::CommandParser::ParseArguments(const std::strin
   size_t match_size = 0;
   for (size_t i = 0; i < str.size(); i++) {
     if (str.substr(i, separator.size()) == separator || i == str.size() - 1) {
-      args.push_back(str.substr(i - match_size, match_size ? match_size : 1));
+      args.push_back(str.substr(i - match_size, i == str.size() - 1 ? match_size + 1 : match_size));
       match_size = 0;
       continue;
     }
