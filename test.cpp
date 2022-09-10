@@ -1,5 +1,6 @@
 #include <iostream>
 #include <cli-creator/Cli.h>
+#include <cli-creator/util/FileSystem.h>
 
 int main(int argc, char* argv[]) {
   CliCreator::Cli cli;
@@ -16,6 +17,13 @@ int main(int argc, char* argv[]) {
 
   cli.commands["--sub"] = [](CliCreator::Arguments args) {
     std::cout << std::stoi(args[0]) - std::stoi(args[1]) << std::endl;
+    return 0;
+  };
+
+  cli.commands["--file"] = [](CliCreator::Arguments) {
+    CliCreator::Util::File file("./test-generated-file");
+    file.write("test-generated-file");
+    std::cout << file.read() << std::endl;
     return 0;
   };
 

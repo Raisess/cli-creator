@@ -2,7 +2,8 @@ CXX=clang++
 
 SRC_DIR=./src
 SRC=$(SRC_DIR)/Cli.cpp \
-		$(SRC_DIR)/CommandParser.cpp
+		$(SRC_DIR)/CommandParser.cpp \
+		$(SRC_DIR)/util/FileSystem.cpp
 
 PUBLIC_DIR=./public
 
@@ -29,7 +30,7 @@ test:
 	make build
 	make install
 	$(CXX) $(LIB_PATH)/cli-creator.so test.cpp -o $(TEST_OUT)
-	$(TEST_OUT) --sum=2,3 --hello --sub=23,3 --fail
+	$(TEST_OUT) --sum=2,3 --hello --sub=23,3 --file --fail
 
 install:
 	sudo mkdir -p $(LIB_PATH)
