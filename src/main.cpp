@@ -9,7 +9,8 @@ int main(int argc, char* argv[]) {
 
   cli.commands["--init"] = [](Arguments args) {
     auto project_name = args[0];
-    std::system(("git clone https://github.com/Raisess/cpp-cli-boilerplate " + project_name).c_str());
+    std::system("cp -r /usr/local/etc/cli-creator/public/cpp-cli-boilerplate .");
+    std::system(("mv ./cpp-cli-boilerplate " + project_name).c_str());
     std::system(("cd " + project_name + " && bash setup.sh").c_str());
     return 0;
   };

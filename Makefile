@@ -1,14 +1,17 @@
 CXX=clang++
 
 SRC_DIR=./src
-SRC=$(SRC_DIR)/CommandParser.cpp \
-		$(SRC_DIR)/Cli.cpp
+SRC=$(SRC_DIR)/Cli.cpp \
+		$(SRC_DIR)/CommandParser.cpp
+
+PUBLIC_DIR=./public
 
 OUT_DIR=./build
 LIB_OUT=$(OUT_DIR)/cli-creator.so
 BIN_OUT=$(OUT_DIR)/cli-creator.o
 TEST_OUT=$(OUT_DIR)/test.o
 
+ETC_PATH=/usr/local/etc/cli-creator
 LIB_PATH=/usr/local/lib/cli-creator
 BIN_PATH=/usr/local/bin/cli-creator
 INCLUDE_PATH=/usr/local/include/cli-creator
@@ -32,7 +35,9 @@ install:
 	sudo mkdir -p $(LIB_PATH)
 	sudo cp $(LIB_OUT) $(LIB_PATH)
 	sudo mkdir -p $(INCLUDE_PATH)
-	sudo cp $(SRC_DIR)/* $(INCLUDE_PATH)
+	sudo cp -r $(SRC_DIR)/* $(INCLUDE_PATH)
+	sudo mkdir -p $(ETC_PATH)
+	sudo cp -r $(PUBLIC_DIR) $(ETC_PATH)
 
 uninstall:
 	sudo rm -r $(LIB_PATH)
