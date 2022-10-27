@@ -41,6 +41,7 @@ install:
 	sudo cp -r $(PUBLIC_DIR) $(ETC_PATH)
 
 uninstall:
+	sudo rm -r $(ETC_PATH)
 	sudo rm -r $(LIB_PATH)
 	sudo rm -r $(INCLUDE_PATH)
 

@@ -1,14 +1,15 @@
 CXX=clang++
+NAME=$(shell basename $(CURDIR))
 
 SRC_DIR=./src
 SRC=$(SRC_DIR)/main.cpp
 
 OUT_DIR=./build
-OUT=$(OUT_DIR)/$(shell basename $(CURDIR)).o
+OUT=$(OUT_DIR)/$(NAME).o
 
 LIB_PATH=/usr/local/lib/cli-creator/cli-creator.so
 BIN_PATH=/usr/local/bin
-BIN=$(BIN_PATH)/$(shell basename $(CURDIR))
+BIN=$(BIN_PATH)/$(NAME)
 
 build:
 	mkdir -p $(OUT_DIR)
