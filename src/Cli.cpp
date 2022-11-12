@@ -4,17 +4,21 @@ CliCreator::Cli::Cli() {}
 CliCreator::Cli::~Cli() {}
 
 int CliCreator::Cli::handle(int argc, char* argv[]) {
-  CommandTuples commands = CommandParser::Parse(argc, argv);
+  if (argc < 2) {
+    std::cerr << "No command provided" << std::endl;
+    return 1;
+  }
 
-  int ret = 0;
-  for (auto command : commands) {
-    auto command_key = std::get<0>(command);
-    ret = command_handler(command_key, std::get<1>(command));
-    if (ret != 0) {
-      std::cout << "Failed executing: " << command_key << std::endl
-        << "Exit code: " << ret << std::endl;
-      return ret;
-    }
+  std::string command = argv[1];
+  Arguments args;
+  for (int i = 2; i < argc; i++) {
+    args.push_back(argv[i]);
+  }
+
+  int ret = this->command_handler(command, args);
+  if (ret != 0) {
+    std::cout << "Failed executing: " << command << std::endl
+      << "Exit code: " << ret << std::endl;
   }
 
   return ret;
@@ -22,7 +26,7 @@ int CliCreator::Cli::handle(int argc, char* argv[]) {
 
 int CliCreator::Cli::command_handler(
   const std::string& command_key,
-  const std::vector<std::string>& command_arguments
+  const Arguments& command_arguments
 ) {
   if (commands.find(command_key) != commands.end()) {
     return commands[command_key](command_arguments);

@@ -4,10 +4,10 @@
 #include <functional>
 #include <unordered_map>
 #include <vector>
-#include "CommandParser.h"
 
 namespace CliCreator {
 
+using Arguments = std::vector<std::string>;
 using Command = std::function<int(Arguments)>;
 using Commands = std::unordered_map<std::string, Command>;
 
@@ -21,7 +21,10 @@ public:
   int handle(int argc, char* argv[]);
 
 private:
-  int command_handler(const std::string& command_key, const std::vector<std::string>& command_arguments);
+  int command_handler(
+    const std::string& command_key,
+    const Arguments& command_arguments
+  );
 };
 
 }
