@@ -1,8 +1,7 @@
 CXX=clang++
 
 SRC_DIR=./src
-SRC=$(SRC_DIR)/Cli.cpp \
-		$(SRC_DIR)/util/FileSystem.cpp
+SRC=$(SRC_DIR)/Cli.cpp
 
 PUBLIC_DIR=./public
 
@@ -31,7 +30,6 @@ test:
 	$(CXX) $(LIB_PATH)/cli-creator.so test.cpp -o $(TEST_OUT)
 	$(TEST_OUT) sum 2 3
 	$(TEST_OUT) sub 23 3
-	$(TEST_OUT) file
 	$(TEST_OUT) hello
 	$(TEST_OUT) fail
 

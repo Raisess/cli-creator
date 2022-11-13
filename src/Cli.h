@@ -13,6 +13,8 @@ using Commands = std::unordered_map<std::string, Command>;
 
 class Cli {
 public:
+  static void ValidateCommandArgsSize(const Arguments&, size_t);
+
   Commands commands;
 
   Cli();

@@ -1,5 +1,12 @@
 #include "Cli.h"
 
+void CliCreator::Cli::ValidateCommandArgsSize(const Arguments& args, size_t min_size) {
+  if (args.size() < min_size) {
+    std::cerr << "Invalid arguments" << std::endl;
+    exit(1);
+  }
+}
+
 CliCreator::Cli::Cli() {}
 CliCreator::Cli::~Cli() {}
 
