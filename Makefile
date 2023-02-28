@@ -34,17 +34,32 @@ test:
 	$(TEST_OUT) fail
 
 install:
-	sudo mkdir -p $(LIB_PATH)
-	sudo cp $(LIB_OUT) $(LIB_PATH)
-	sudo mkdir -p $(INCLUDE_PATH)
-	sudo cp -r $(SRC_DIR)/* $(INCLUDE_PATH)
-	sudo mkdir -p $(ETC_PATH)
-	sudo cp -r $(PUBLIC_DIR) $(ETC_PATH)
+	if [ "$(NO_SUDO)" == "1" ]; then \
+		mkdir -p $(LIB_PATH); \
+		cp $(LIB_OUT) $(LIB_PATH); \
+		mkdir -p $(INCLUDE_PATH); \
+		cp -r $(SRC_DIR)/* $(INCLUDE_PATH); \
+		mkdir -p $(ETC_PATH); \
+		cp -r $(PUBLIC_DIR) $(ETC_PATH); \
+	else \
+		sudo mkdir -p $(LIB_PATH); \
+		sudo cp $(LIB_OUT) $(LIB_PATH); \
+		sudo mkdir -p $(INCLUDE_PATH); \
+		sudo cp -r $(SRC_DIR)/* $(INCLUDE_PATH); \
+		sudo mkdir -p $(ETC_PATH); \
+		sudo cp -r $(PUBLIC_DIR) $(ETC_PATH); \
+	fi
 
 uninstall:
-	sudo rm -r $(ETC_PATH)
-	sudo rm -r $(LIB_PATH)
-	sudo rm -r $(INCLUDE_PATH)
+	if [ "$(NO_SUDO)" == "1" ]; then \
+		rm -r $(ETC_PATH); \
+		rm -r $(LIB_PATH); \
+		rm -r $(INCLUDE_PATH); \
+	else \
+		sudo rm -r $(ETC_PATH); \
+		sudo rm -r $(LIB_PATH); \
+		sudo rm -r $(INCLUDE_PATH); \
+	fi
 
 clean:
 	rm -rf $(OUT_DIR)

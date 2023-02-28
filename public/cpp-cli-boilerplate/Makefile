@@ -16,10 +16,18 @@ build:
 	$(CXX) $(LIB_PATH) $(SRC) -o $(OUT)
 
 install:
-	sudo cp $(OUT) $(BIN)
+	if [ "$(NO_SUDO)" == "1" ]; then \
+		cp $(OUT) $(BIN); \
+	else \
+		sudo cp $(OUT) $(BIN); \
+	fi
 
 uninstall:
-	sudo rm -rf $(BIN)
+	if [ "$(NO_SUDO)" == "1" ]; then \
+		rm -rf $(BIN); \
+	else \
+		sudo rm -rf $(BIN); \
+	fi
 
 test:
 	$(OUT) --hello
